@@ -18,3 +18,5 @@ Route::get('/', function () {
 });
 
 Route::resource('questoes', 'QuestaoController');
+
+Route::resource('testes', 'TesteController');
