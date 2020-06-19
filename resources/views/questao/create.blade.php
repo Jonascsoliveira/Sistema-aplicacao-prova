@@ -14,13 +14,14 @@
         Resposta C :: <br><input class=" col-md-4" type="text" name="respostaC" id="respostaC" value="{{old('respostaC')}}" required><br>
         Resposta D :: <br><input class=" col-md-4" type="text" name="respostaD" id="respostaD" value="{{old('respostaD')}}" required><br>
         Resposta E :: <br><input class=" col-md-4" type="text" name="respostaE" id="respostaE" value="{{old('respostaE')}}" required><br>
-        Resposta Correta :: <br><select name="respostaCorreta" id="respostaCorreta">
+        Resposta Correta :: <br><select name="resposta_correta" id="resposta_correta">
                                     <option value="A">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
                                     <option value="D">D</option>
                                     <option value="E">E</option>
                                 </select><br><br>
+        Valor da Questão :: <br><input class=" col-md-4" type="text" name="valor_questao" id="valor_questao" value="{{old('valor_questao')}}" required><br>
         <input type="hidden" name="id" value="{{old('id')}}">
         <input type="submit" name="enviado" value="Cadastrar">
     </form>
