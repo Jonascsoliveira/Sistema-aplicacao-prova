@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Teste;
+
 use Illuminate\Http\Request;
 
 class TesteController extends Controller
@@ -13,7 +15,7 @@ class TesteController extends Controller
      */
     public function index()
     {
-        //
+        return view('teste.index')->withTestes(Teste::paginate(10));
     }
 
     /**
@@ -34,7 +36,11 @@ class TesteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Teste::create($data);
+
+        return back();
     }
 
     /**
@@ -56,7 +62,8 @@ class TesteController extends Controller
      */
     public function edit($id)
     {
-        //
+        $teste = Teste::findOrFail($id);
+        return view('testes.edit')->withTeste($teste);
     }
 
     /**
@@ -68,7 +75,10 @@ class TesteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $teste = Teste::findOrFail($id);
+
+        $teste->update($data);
     }
 
     /**
@@ -79,6 +89,7 @@ class TesteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $teste = Teste::findOrFail($id);
+        $teste->delete();
     }
 }

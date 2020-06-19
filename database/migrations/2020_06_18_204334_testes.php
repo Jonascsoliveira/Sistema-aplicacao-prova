@@ -15,6 +15,7 @@ class Testes extends Migration
     {
         Schema::create('testes', function (Blueprint $table) {
             $table->id();
+            $table->timestamps();
             $table->string('name');
             $table->double('pontos_aprovacao');
         });

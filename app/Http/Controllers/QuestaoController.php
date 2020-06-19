@@ -23,7 +23,7 @@ class QuestaoController extends Controller
      */
     public function create()
     {
-        return view('questao.create');
+        return view('questoes.create');
     }
 
     /**
