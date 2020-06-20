@@ -16,6 +16,7 @@ class Questao extends Model
         'respostaD',
         'respostaE',
         'resposta_correta',
+        'valor_questao',
         'teste_id'
     ];
 }

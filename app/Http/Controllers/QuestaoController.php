@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Questao;
+use App\Teste;
+
 use Illuminate\Http\Request;
 
 class QuestaoController extends Controller
@@ -13,7 +16,7 @@ class QuestaoController extends Controller
      */
     public function index()
     {
-        //
+        return view('questao.index')->withQuestoes(Questao::paginate(10));
     }
 
     /**
@@ -23,7 +26,7 @@ class QuestaoController extends Controller
      */
     public function create()
     {
-        return view('questoes.create');
+        return view('questao.create')->withTestes(Teste::all());
     }
 
     /**
@@ -34,7 +37,11 @@ class QuestaoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Questao::create($data);
+
+        return view('questao.create')->withTestes(Teste::all());
     }
 
     /**
@@ -56,7 +63,11 @@ class QuestaoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $testes = Teste::all();
+        $questao = Questao::findOrFail($id);
+        //$dados = array('testes' => $testes, 'questao' => $questao);
+        //return view('questao.edit')->withQuestao($questao);
+        return view('questao.edit', compact('testes', 'questao'));
     }
 
     /**
@@ -68,7 +79,12 @@ class QuestaoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+        $questao = Questao::findOrFail($id);
+
+        $questao->update($data);
+
+        return view('questao.index')->withQuestoes(Questao::paginate(10));
     }
 
     /**
@@ -79,6 +95,8 @@ class QuestaoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $questao = Questao::findOrFail($id);
+        $questao->delete();
+        return view('questao.index')->withQuestoes(Questao::paginate(10));
     }
 }

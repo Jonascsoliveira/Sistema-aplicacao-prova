@@ -22,6 +22,13 @@
                                     <option value="E">E</option>
                                 </select><br><br>
         Valor da Questão :: <br><input class=" col-md-4" type="text" name="valor_questao" id="valor_questao" value="{{old('valor_questao')}}" required><br>
+        Qual teste pertence::<br><select name="teste_id" id="teste_id">
+                            @forelse($testes as $teste)
+                                <option value="{{$teste->id}}">{{$teste->name}}</option>
+                            @empty
+                                <option value="">Não há testes cadastrados</option>
+                            @endforelse 
+                            </select><br><br>
         <input type="hidden" name="id" value="{{old('id')}}">
         <input type="submit" name="enviado" value="Cadastrar">
     </form>

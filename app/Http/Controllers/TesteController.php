@@ -40,7 +40,7 @@ class TesteController extends Controller
 
         Teste::create($data);
 
-        return back();
+        return view('teste.index')->withTestes(Teste::paginate(10));
     }
 
     /**
@@ -63,7 +63,7 @@ class TesteController extends Controller
     public function edit($id)
     {
         $teste = Teste::findOrFail($id);
-        return view('testes.edit')->withTeste($teste);
+        return view('teste.edit')->withTeste($teste);
     }
 
     /**
@@ -79,6 +79,8 @@ class TesteController extends Controller
         $teste = Teste::findOrFail($id);
 
         $teste->update($data);
+
+        return view('teste.index')->withTestes(Teste::paginate(10));
     }
 
     /**
@@ -91,5 +93,6 @@ class TesteController extends Controller
     {
         $teste = Teste::findOrFail($id);
         $teste->delete();
+        return view('teste.index')->withTestes(Teste::paginate(10));
     }
 }

@@ -6,29 +6,28 @@
     <br><br><br>
     <div class="row">
         <div class="col-sm-12">
-            <a href="{{route('testes.create')}}" class="btn btn-success flot-right">Cadastrar Testes</a>
-            <h2>Testes disponíveis</h2>
+            <a href="{{route('questoes.create')}}" class="btn btn-success flot-right">Cadastrar Questoes</a>
+            <h2>Questoes disponíveis</h2>
             <div class="clearfix"></div>
         </div>
     </div>
     <table class="table table-striped">
         <thead>
         <tr>
-            <th>Título</th>
-            <th>Pontos para Aprvação</th>
+            <th>Enunciado</th>
+            <th>Valor da questão</th>
             <th>Ações</th>
         </tr>
         </thead>
         <tbody>
-        @forelse($testes as $teste)
+        @forelse($questoes as $questao)
             <tr>
-                <td>{{$teste->name}}</td>
-                <td>{{$teste->pontos_aprovacao}}</td>
+                <td>{{$questao->enunciado}}</td>
+                <td>{{$questao->valor_questao}}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{route('testes.create')}}" class="btn btn-info">Realizar Teste</a>
-                        <a href="{{route('testes.edit',['testis' => $teste->id])}}" class="btn btn-warning">Alterar</a>
-                        <form action="{{route('testes.destroy',['testis' => $teste->id])}}" method="POST">
+                        <a href="{{route('questoes.edit',['questo' => $questao->id])}}" class="btn btn-warning">Alterar</a>
+                        <form action="{{route('questoes.destroy',['questo' => $questao->id])}}" method="POST">
                             @csrf
                             @method('DELETE')    
                             <button class="btn btn-danger">Excluir</button>
