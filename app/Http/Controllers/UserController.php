@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Teste;
-use App\User;
-
 use Illuminate\Http\Request;
 
-class TesteController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,7 +13,7 @@ class TesteController extends Controller
      */
     public function index()
     {
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        //
     }
 
     /**
@@ -26,7 +23,7 @@ class TesteController extends Controller
      */
     public function create()
     {
-        return view('teste.create');
+        //
     }
 
     /**
@@ -37,13 +34,7 @@ class TesteController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-
-        $user = User::find(1);//find id user
-        //Teste::create($data);
-        $user->posts()->create($data);
-
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        //
     }
 
     /**
@@ -65,8 +56,7 @@ class TesteController extends Controller
      */
     public function edit($id)
     {
-        $teste = Teste::findOrFail($id);
-        return view('teste.edit')->withTeste($teste);
+        //
     }
 
     /**
@@ -78,12 +68,7 @@ class TesteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
-        $teste = Teste::findOrFail($id);
-
-        $teste->update($data);
-
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        //
     }
 
     /**
@@ -94,8 +79,6 @@ class TesteController extends Controller
      */
     public function destroy($id)
     {
-        $teste = Teste::findOrFail($id);
-        $teste->delete();
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        //
     }
 }

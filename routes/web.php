@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'TesteController@index');
+Route::get('/', function () {
+    return view('home');
+});
+
+//Route::get('/', 'TesteController@index');
 
 Route::resource('questoes', 'QuestaoController');
 

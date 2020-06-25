@@ -15,6 +15,7 @@
         <thead>
         <tr>
             <th>Título</th>
+            <th>Responsável</th>
             <th>Pontos para Aprvação</th>
             <th>Ações</th>
         </tr>
@@ -23,6 +24,7 @@
         @forelse($testes as $teste)
             <tr>
                 <td>{{$teste->name}}</td>
+                <td>{{$teste->user->name}}</td>
                 <td>{{$teste->pontos_aprovacao}}</td>
                 <td>
                     <div class="btn-group">

@@ -19,4 +19,9 @@ class Questao extends Model
         'valor_questao',
         'teste_id'
     ];
+
+    public function teste()
+    {
+        return $this->belongsTo(Teste::class);
+    }
 }
