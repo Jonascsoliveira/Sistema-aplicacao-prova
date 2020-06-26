@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('home');
-});
+});*/
 
-//Route::get('/', 'TesteController@index');
+Route::get('/', 'HomeController@index');
 
-Route::resource('questoes', 'QuestaoController');
+Route::resource('questoes', 'QuestaoController')->middleware('auth');
 
-Route::resource('testes', 'TesteController');
+Route::resource('testes', 'TesteController')->middleware('auth');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');

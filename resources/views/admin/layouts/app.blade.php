@@ -24,6 +24,10 @@ body,h1,h2,h3,h4,h5,h6 {font-family: "Lato", sans-serif}
     <a href="{{route('questoes.create')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Cadastrar Questão</a>
     <a href="{{route('testes.index')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Listar Testes</a>
     <a href="{{route('questoes.index')}}" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Listar Questões</a>
+    <form action="{{route('logout')}}" method="post">
+        @csrf
+        <input type="submit" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white" value="Sair">
+    </form>
   </div>
 
   <!-- Navbar on small screens -->
