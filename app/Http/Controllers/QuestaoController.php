@@ -16,7 +16,7 @@ class QuestaoController extends Controller
      */
     public function index()
     {
-        return view('questao.index')->withQuestoes(Questao::all());
+        return view('questao.index')->withQuestoes(Questao::paginate(10));
     }
 
     /**

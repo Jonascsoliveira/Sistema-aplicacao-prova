@@ -28,7 +28,7 @@
                 <td>{{$teste->pontos_aprovacao}}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{route('testes.create')}}" class="btn btn-info">Realizar Teste</a>
+                        <a href="{{route('testes.show',['testis' => $teste->id])}}" class="btn btn-info">Realizar Teste</a>
                         <a href="{{route('testes.edit',['testis' => $teste->id])}}" class="btn btn-warning">Alterar</a>
                         <form action="{{route('testes.destroy',['testis' => $teste->id])}}" method="POST">
                             @csrf
@@ -45,4 +45,5 @@
         @endforelse 
         </tbody>
     </table>
+    {{$testes->links()}}
 @endsection

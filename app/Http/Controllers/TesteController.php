@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Teste;
 use App\User;
-
+use Exception;
 use Illuminate\Http\Request;
 
 class TesteController extends Controller
@@ -16,7 +16,7 @@ class TesteController extends Controller
      */
     public function index()
     {
-        return view('teste.index')->withTestes(Teste::all());
+        return view('teste.index')->withTestes(Teste::paginate(10));
     }
 
     /**
@@ -38,12 +38,19 @@ class TesteController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-
-        $user = User::find(1);//find id user
-        //Teste::create($data);
-        $user->posts()->create($data);
+        try{
+        $user = User::find(auth()->user()->id);//find id user
+        
+        $user->testes()->create($data);
 
         return view('teste.index')->withTestes(Teste::paginate(10));
+        }catch(Exception $e){
+            $messege = 'Ocorreu um erro';
+            if(env('APP_DEBUG')){
+                $messege = $e->getMessage();
+            }
+            return redirect()->back();
+        }
     }
 
     /**
@@ -54,7 +61,10 @@ class TesteController extends Controller
      */
     public function show($id)
     {
-        //
+        $teste = Teste::findOrFail($id);
+        $questao = $teste->questao()->all();
+
+        return view('teste.show');
     }
 
     /**
