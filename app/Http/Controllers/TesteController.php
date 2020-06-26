@@ -16,7 +16,7 @@ class TesteController extends Controller
      */
     public function index()
     {
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        return view('teste.index')->withTestes(Teste::all());
     }
 
     /**
