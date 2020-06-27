@@ -62,7 +62,6 @@ class TesteController extends Controller
     public function show($id)
     {
         $teste = Teste::findOrFail($id);
-        //$questao = $teste->questao()->all();
 
         return view('teste.show')->withTestes($teste);
     }
@@ -76,7 +75,11 @@ class TesteController extends Controller
     public function edit($id)
     {
         $teste = Teste::findOrFail($id);
-        return view('teste.edit')->withTeste($teste);
+        if(auth()->user()->id == $teste->user_id){
+            return view('teste.edit')->withTeste($teste);
+        }else{
+            return back()->withErrors(['Você não pode editar testes feitos por outro usuários, somente os feitos por você!']);
+        }
     }
 
     /**
@@ -105,8 +108,12 @@ class TesteController extends Controller
     public function destroy($id)
     {
         $teste = Teste::findOrFail($id);
-        $teste->delete();
-        return view('teste.index')->withTestes(Teste::paginate(10));
+        if(auth()->user()->id == $teste->user_id){
+            $teste->delete();
+            return view('teste.index')->withTestes(Teste::paginate(10));
+        }else{
+            return back()->withErrors(['Você não pode excluir testes feitos por outro usuários, somente os feitos por você!']);
+        }
     }
 
     /**
@@ -128,8 +135,14 @@ class TesteController extends Controller
                 $pontos += $resultado->valor_questao;
             }
         }
+        if($pontos >= $testes->pontos_aprovacao){
+            $msg = auth()->user()->name.', você acabou de ser aprovado no teste '.$testes->name.' com '.$pontos.' pontos';
+        }else{
+            $msg = auth()->user()->name.', você acabou de ser reprovado no teste '.$testes->name.' com '.$pontos.
+            ' pontos. Quantidade necessária de pontos para aprovação é de '.$testes->pontos_aprovacao.' pontos';
+        }
+        //dd($msg);
 
-        dd($pontos);
-
+        return view('home')->withMensagem($msg);
     }
 }

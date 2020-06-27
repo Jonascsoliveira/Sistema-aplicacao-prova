@@ -8,6 +8,9 @@
         <div class="col-sm-12">
             <a href="{{route('testes.create')}}" class="btn btn-success flot-right">Cadastrar Testes</a>
             <h2>Testes disponíveis</h2>
+            @if($errors->any())
+                <h4>{{$errors->first()}}</h4>
+            @endif
             <div class="clearfix"></div>
         </div>
     </div>

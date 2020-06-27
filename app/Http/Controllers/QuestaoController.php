@@ -84,7 +84,7 @@ class QuestaoController extends Controller
 
         $questao->update($data);
 
-        return view('questao.index')->withQuestoes(Questao::paginate(10));
+        return redirect('questoes')->withQuestoes(Questao::paginate(10));
     }
 
     /**

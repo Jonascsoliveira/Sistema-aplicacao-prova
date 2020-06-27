@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\Auth;
 
 // user login: lia.beatty@example.net | password
 
+// teste 1 respostas para teste A,B,B,D
+
 Route::get('/', 'HomeController@index');
 
 Auth::routes();
