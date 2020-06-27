@@ -30,6 +30,7 @@ Route::resource('questoes', 'QuestaoController')->middleware('auth');
 
 Route::resource('testes', 'TesteController')->middleware('auth');
 
+Route::post('testes/result/{testis}', 'TesteController@result')->middleware('auth')->name('testes.result');
 
 
 

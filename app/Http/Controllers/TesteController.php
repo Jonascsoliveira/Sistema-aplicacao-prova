@@ -62,9 +62,9 @@ class TesteController extends Controller
     public function show($id)
     {
         $teste = Teste::findOrFail($id);
-        $questao = $teste->questao()->all();
+        //$questao = $teste->questao()->all();
 
-        return view('teste.show');
+        return view('teste.show')->withTestes($teste);
     }
 
     /**
@@ -107,5 +107,29 @@ class TesteController extends Controller
         $teste = Teste::findOrFail($id);
         $teste->delete();
         return view('teste.index')->withTestes(Teste::paginate(10));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function result(Request $request, $id)
+    {
+        $testes = Teste::findOrFail($id);
+        $data = $request->all();
+        //dd($data);
+        $cont=0;
+        $pontos = 0;
+        foreach ($testes->questao as $resultado) {
+            $cont++;
+            if($data['resposta'.$cont] == $resultado->resposta_correta){
+                $pontos += $resultado->valor_questao;
+            }
+        }
+
+        dd($pontos);
+
     }
 }
