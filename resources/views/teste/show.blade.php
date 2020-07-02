@@ -12,8 +12,13 @@
                 <th>Nº</th>
                 <th>Enunciado</th>
             </tr>
-            </thead>
+        </thead>
         <tbody>
+            <tr>
+            @if($errors->any())
+                <h4>{{$errors->first()}}</h4>
+            @endif
+            </tr>
         <form action="{{route('testes.result',['testis' => $testes->id])}}" method="post">
             @csrf
             @php $i = 0; @endphp
@@ -23,7 +28,7 @@
                     <td>{{ $i }}</td>
                     <td>{{$teste->enunciado}}<br>
                         <table class="table table-striped">
-                            <tr><input type="radio" name="resposta{{$i}}" value="A">A) {{$teste->respostaA}}</tr><br>
+                            <tr><input type="radio" name="resposta{{$i}}" value="A" checked>A) {{$teste->respostaA}}</tr><br>
                             <tr><input type="radio" name="resposta{{$i}}" value="B">B) {{$teste->respostaB}}</tr><br>
                             <tr><input type="radio" name="resposta{{$i}}" value="C">C) {{$teste->respostaC}}</tr><br>
                             <tr><input type="radio" name="resposta{{$i}}" value="D">D) {{$teste->respostaD}}</tr><br>
@@ -36,7 +41,9 @@
                     <td colspan="5">Desculpe não há registros de questões para este teste!</td>
                 </tr>
             @endforelse
-            <input type="submit" class="btn btn-success mb-4" value="Finalizar tentativa">
+            <div>
+                <input type="submit" class="btn btn-success mb-4" value="Finalizar tentativa">
+            </div>
         </form>
         </tbody>
     </table>

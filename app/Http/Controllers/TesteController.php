@@ -124,25 +124,29 @@ class TesteController extends Controller
      */
     public function result(Request $request, $id)
     {
-        $testes = Teste::findOrFail($id);
+        
         $data = $request->all();
-        //dd($data);
-        $cont=0;
-        $pontos = 0;
-        foreach ($testes->questao as $resultado) {
-            $cont++;
-            if($data['resposta'.$cont] == $resultado->resposta_correta){
-                $pontos += $resultado->valor_questao;
+        if(isset($data)){
+            $testes = Teste::findOrFail($id);
+            $cont=0;
+            $pontos = 0;
+            foreach ($testes->questao as $resultado) {
+                $cont++;
+                if($data['resposta'.$cont] == $resultado->resposta_correta){
+                    $pontos += $resultado->valor_questao;
+                }
             }
-        }
-        if($pontos >= $testes->pontos_aprovacao){
-            $msg = auth()->user()->name.', você acabou de ser aprovado no teste '.$testes->name.' com '.$pontos.' pontos';
-        }else{
-            $msg = auth()->user()->name.', você acabou de ser reprovado no teste '.$testes->name.' com '.$pontos.
-            ' pontos. Quantidade necessária de pontos para aprovação é de '.$testes->pontos_aprovacao.' pontos';
-        }
-        //dd($msg);
+            if($pontos >= $testes->pontos_aprovacao){
+                $msg = auth()->user()->name.', você acabou de ser aprovado no teste '.$testes->name.' com '.$pontos.' pontos';
+            }else{
+                $msg = auth()->user()->name.', você acabou de ser reprovado no teste '.$testes->name.' com '.$pontos.
+                ' pontos. Quantidade necessária de pontos para aprovação é de '.$testes->pontos_aprovacao.' pontos';
+            }
+            //dd($msg);
 
-        return view('home')->withMensagem($msg);
+            return view('home')->withMensagem($msg);
+        }else{
+            return back()->withErrors(['Por favor preencha corretamente as respostas!']);
+        }
     }
 }
